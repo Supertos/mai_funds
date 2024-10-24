@@ -65,6 +65,9 @@ int finrepr( size_t radix, double n ) {
 		denominator /= gc;
 	}
 	
+	denominator = round( (long double)denominator / (long double)val ); // Since we can't actually represent e.g. 1/3 in double, this will do	
+	// printf( "Denominator: %zu\n", denominator );
+	
 	uivector* fct = factors( radix );
 	
 	for( size_t i = 0; i < fct->length; i++ ) {
@@ -94,9 +97,9 @@ void finreprs( int* result, size_t radix, size_t n, ... ) {
 int main() {
 	int* out = calloc( 5, sizeof(int) );
 	
-	finreprs( out, 16, 5, 1.0 / 16.0, 1.0 / 3.0, 8.0 / 76.0, 1.0 / 2.0, 1.0 / 256.0 );
+	finreprs( out, 3, 1, 1.0 / 243.0);
 	
-	for( size_t a = 0; a < 5; a++ )
+	for( size_t a = 0; a < 1; a++ )
 		printf( "%d\n", out[a] );
 	printf( "\n" );
 	
